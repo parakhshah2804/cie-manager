@@ -4,7 +4,7 @@
 
 {% load static %}
 <section class="content">
-        
+
         <div class="container-fluid">
           <!-- Small boxes (Stat box) -->
           <div class="row">
@@ -13,8 +13,8 @@
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3>{{ all_student_count }}</h3>
-                  
-                  <p>Total Students</p>
+
+                 <p>Total Students</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -38,7 +38,7 @@
               </div>
             </div>
             <!-- ./col -->
-            
+
             <div class="col-lg-3 col-6">
               <!-- small box -->
               <div class="small-box bg-warning">
@@ -69,10 +69,10 @@
               </div>
             </div>
             <!-- ./col -->
-            
-          
+
+
           </div>
-          
+
           <!-- /.row -->
           <div class="row">
             <div class="col-lg-6">
@@ -87,6 +87,7 @@
                     <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                   </div>
                 </div>
+
                 <div class="card-body">
                   <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
@@ -113,7 +114,7 @@
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
-              
+
             </div>
           </div>
 
@@ -183,9 +184,9 @@
 
 
           <div class="col-lg-6">
-            
+
           </div>
-        
+
         </div>
 
         <div class="row">
@@ -213,13 +214,13 @@
 
 
           <div class="col-lg-6">
-            
+
           </div>
-        
+
         </div>
 
         </div><!-- /.container-fluid -->
-        
+
       </section>
 
   {% endblock main_content %}
@@ -231,7 +232,7 @@
       var donutChartCanvas = $('#pieChart').get(0).getContext('2d')
       var pieData        = {
         labels: [
-            'Students', 
+            'Students',
             'Staffs',
         ],
         datasets: [
@@ -246,6 +247,7 @@
       //- PIE CHART -
       //-------------
       // Get context with jQuery - using jQuery's .get() method.
+      
       var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
       var pieData        = pieData;
       var pieOptions     = {
@@ -257,7 +259,7 @@
       var pieChart = new Chart(pieChartCanvas, {
         type: 'pie',
         data: pieData,
-        options: pieOptions      
+        options: pieOptions
       })
 
 
@@ -283,7 +285,7 @@
       var donutChart = new Chart(donutChartCanvas, {
         type: 'doughnut',
         data: donutData,
-        options: donutOptions      
+        options: donutOptions
       })
 
 
@@ -314,7 +316,7 @@
       var pieChart2 = new Chart(pieChartCanvas2, {
         type: 'pie',
         data: pieData2,
-        options: pieOptions2      
+        options: pieOptions2
       })
 
       // Total Students in Each Subject
@@ -344,7 +346,7 @@
       var pieChart3 = new Chart(pieChartCanvas3, {
         type: 'pie',
         data: pieData3,
-        options: pieOptions3      
+        options: pieOptions3
       })
 
       //-------------
@@ -367,7 +369,7 @@
             pointStrokeColor    : 'rgba(60,141,188,1)',
             pointHighlightFill  : '#fff',
             pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : staff_attendance_leave_list 
+            data                : staff_attendance_leave_list
           },*/
           {
             label               : 'Classes Taken',
@@ -398,7 +400,7 @@
       }
 
       var barChart = new Chart(barChartCanvas, {
-        type: 'bar', 
+        type: 'bar',
         data: barChartData,
         options: barChartOptions
       })
@@ -423,7 +425,7 @@
             pointStrokeColor    : 'rgba(60,141,188,1)',
             pointHighlightFill  : '#fff',
             pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : student_attendance_leave_list 
+            data                : student_attendance_leave_list
           },
           {
             label               : 'Attendance',
@@ -454,7 +456,7 @@
       }
 
       var barChart2 = new Chart(barChartCanvas2, {
-        type: 'bar', 
+        type: 'bar',
         data: barChartData2,
         options: barChartOptions2
       })

@@ -9,7 +9,7 @@
 {% load static %}
 
 <section class="content">
-   
+
         <div class="container-fluid">
 
             {% comment %} Boxes Section Starts {% endcomment %}
@@ -123,7 +123,7 @@
 
         </div><!-- /.container-fluid -->
         <div class="container">
-            <h2>Chart.js — Pie Chart Demo</h2>
+            <h2></h2>
             <div>
               <canvas id="myChart"></canvas>
             </div>
@@ -137,7 +137,7 @@
        $(document).ready(function(){
         console.log(123)
       var ctx = document.getElementById("myChart").getContext('2d');
-var myChart = new Chart(ctx, {
+/*var myChart = new Chart(ctx, {
   type: 'pie',
   data: {
     labels: ["Green", "Blue", "Gray", "Purple", "Yellow", "Red", "Black"],
@@ -155,12 +155,12 @@ var myChart = new Chart(ctx, {
     }]
   }
 });
-      
+      */
            //Code for Pie Chart
             var pieData= {
             labels: [
-                'ABSENT', 
-                'PRESENT', 
+                'ABSENT',
+                'PRESENT',
             ],
             datasets: [
                 {
@@ -182,7 +182,7 @@ var myChart = new Chart(ctx, {
             var pieChart = new Chart(pieChartCanvas, {
             type: 'pie',
             data: pieData,
-            options: pieOptions      
+            options: pieOptions
             })
 
             //Code for Bar Chart
@@ -232,7 +232,7 @@ var myChart = new Chart(ctx, {
             }
 
             var barChart = new Chart(barChartCanvas, {
-            type: 'bar', 
+            type: 'bar',
             data: barChartData,
             options: barChartOptions
             })

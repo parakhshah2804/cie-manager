@@ -31,7 +31,7 @@ class AdminHOD(models.Model):
 
 class Department(models.Model):
     id = models.AutoField(primary_key=True)
-    dept_name = models.CharField(max_length=255)
+    dept_name = models.CharField(max_length=255,unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
@@ -46,7 +46,7 @@ class Staffs(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
-    
+
 class Subjects(models.Model):
     id =models.AutoField(primary_key=True)
     subject_name = models.CharField(max_length=255)
@@ -155,6 +155,16 @@ class StudentResult(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+class Queries(models.Model):
+    id=models.AutoField(primary_key=True)
+    query_id = models.ForeignKey(Students, on_delete=models.CASCADE)
+    type_query = models.TextField()
+    reply_query = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
+
 
 #Creating Django Signals
 
@@ -172,7 +182,7 @@ def create_user_profile(sender, instance, created, **kwargs):
             Staffs.objects.create(admin=instance)
         if instance.user_type == 3:
             Students.objects.create(admin=instance, dept_id=Department.objects.all()[0], batch_id=Batch.objects.all()[0], address="", profile_pic="", gender="")
-    
+
 
 @receiver(post_save, sender=CustomUser)
 def save_user_profile(sender, instance, **kwargs):
@@ -182,6 +192,3 @@ def save_user_profile(sender, instance, **kwargs):
         instance.staffs.save()
     if instance.user_type == 3:
         instance.students.save()
-    
-
-

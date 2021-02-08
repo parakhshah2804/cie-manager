@@ -35,7 +35,7 @@
                 </p>
               </a>
             </li>
-            
+
 
             <li class="nav-item">
               {% url 'manage_staff' as manage_staff %}
@@ -47,7 +47,7 @@
                 </p>
               </a>
             </li>
-            
+
             <li class="nav-item">
               {% url 'add_staff' as add_staff %}
               <a href="{{ add_staff }}" class="nav-link {% if request.path == add_staff %} active {% endif %}">
@@ -173,7 +173,15 @@
                 </p>
               </a>
             </li>
-
+            <li class="nav-item">
+              {% url 'query_hod_message' as query_hod_message %}
+              <a href="{{ query_hod_message }}" class="nav-link {% if request.path == query_hod_message %} active {% endif %}">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Queries Notification
+                </p>
+              </a>
+            </li>
 
           </ul>
         </nav>

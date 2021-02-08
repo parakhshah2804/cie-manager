@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 import json,sys
 
-from student_management_app.models import CustomUser, Staffs, Department, Subjects, Students, Batch, FeedBackStudent, FeedBackStaffs,Attendance, AttendanceReport
+from student_management_app.models import CustomUser, Staffs, Department, Subjects, Students, Batch, FeedBackStudent, FeedBackStaffs,Attendance, AttendanceReport,Queries
 from .forms import AddStudentForm, EditStudentForm,AddStaffForm, EditStaffForm
 
 
@@ -30,7 +30,7 @@ def admin_home(request):
             course_name_list.append(course.dept_name)
             subject_count_list.append(subjects)
             student_count_list_in_course.append(students)
-        
+
         subject_all = Subjects.objects.all()
         subject_list = []
         student_count_list_in_subject = []
@@ -39,7 +39,7 @@ def admin_home(request):
             student_count = Students.objects.filter(dept_id=course.id).count()
             subject_list.append(subject.subject_name)
             student_count_list_in_subject.append(student_count)
-        
+
         # For Saffs
         staff_attendance_present_list=[]
         #staff_attendance_leave_list=[]
@@ -63,7 +63,7 @@ def admin_home(request):
         for student in students:
             attendance = AttendanceReport.objects.filter(student_id=student.id, status=True).count()
             absent = AttendanceReport.objects.filter(student_id=student.id, status=False).count()
-        
+
             student_attendance_present_list.append(attendance)
             student_attendance_leave_list.append(absent)
             student_name_list.append(student.admin.first_name)
@@ -83,7 +83,7 @@ def admin_home(request):
             "student_attendance_leave_list":student_attendance_leave_list,
             "staff_name_list": staff_name_list,
             "student_attendance_present_list": student_attendance_present_list,
-        
+
             "student_name_list": student_name_list,
         }
         print(context)
@@ -118,7 +118,7 @@ def add_staff_save(request):
             course_id = form.cleaned_data['dept_id']
             gender = form.cleaned_data['gender']
 
-            # Getting Profile     
+            # Getting Profile
             # First Check whether the file is selected or not
             # Upload only if file is selected
             if len(request.FILES) != 0:
@@ -462,7 +462,7 @@ def add_student_save(request):
             course_id = form.cleaned_data['dept_id']
             gender = form.cleaned_data['gender']
 
-            # Getting Profile     
+            # Getting Profile
             # First Check whether the file is selected or not
             # Upload only if file is selected
             if len(request.FILES) != 0:
@@ -726,7 +726,7 @@ def edit_subject_save(request):
             subject.staff_id = staff
             subject.credit=credit
             subject.cid=sid
-            
+
             subject.save()
 
             messages.success(request, "Subject Updated Successfully.")
@@ -828,6 +828,25 @@ def staff_feedback_message_reply(request):
     except:
         return HttpResponse("False")
 
+def query_hod_message(request):
+    queries = Queries.objects.all()
+    context ={
+       "queries" : queries
+    }
+    return render(request, 'hod_template/query_hod_template.html',context)
+
+def query_hod_reply(request):
+    queries_id=request.POST.get('id')
+    reply_message = request.POST.get('reply')
+
+    try:
+        type_query = Queries.objects.get(id=queries_id)
+        type_query.reply_query = reply_query
+        type_query.save()
+        return HttpResponse("True")
+
+    except:
+        return HttpResponse("False")
 
 def admin_view_attendance(request):
     subjects = Subjects.objects.all()
@@ -911,7 +930,7 @@ def admin_profile_update(request):
         except:
             messages.error(request, "Failed to Update Profile")
             return redirect('admin_profile')
-    
+
 
 
 def staff_profile(request):
@@ -920,6 +939,3 @@ def staff_profile(request):
 
 def student_profile(requtest):
     pass
-
-
-
